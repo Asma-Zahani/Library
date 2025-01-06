@@ -1,0 +1,46 @@
+<div class="ml-5">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <!-- username -->
+        <p-floatlabel variant="on">
+            <input pInputText id="username" formControlName="username" autocomplete="off" class="w-full mb-2" />
+            <label for="username">Username</label>
+            
+        </p-floatlabel>
+        <ng-container *ngIf="username?.invalid && username?.touched">
+            <small class="p-error" *ngIf="username?.hasError('required')">Username is required.</small>
+        </ng-container>
+
+        <!-- email -->
+        <p-floatlabel variant="on">
+            <input pInputText id="email" formControlName="email" autocomplete="off" class="w-full mb-2" />
+            <label for="email">Email</label>
+            
+        </p-floatlabel>
+        <ng-container *ngIf="email?.invalid && email?.touched">
+            <small class="p-error" *ngIf="email?.hasError('required')">Email is required.</small>
+            <small class="p-error" *ngIf="email?.hasError('email')">Invalid email format.</small>
+        </ng-container>
+        <!-- password -->
+        <p-floatlabel variant="on">
+            <p-password formControlName="password" [feedback]="false" fluid="true" class="w-full mb-2" [toggleMask]="true"/>
+            <label for="password">Password</label>
+            
+        </p-floatlabel>
+        <ng-container *ngIf="password?.invalid && password?.touched">
+            <small class="p-error" *ngIf="password?.hasError('required')">Password is required.</small>
+        </ng-container>
+
+        <!-- Role Dropdown -->
+        <p-floatlabel variant="on">
+            <p-select [options]="roles" formControlName="role" optionLabel="name" placeholder="Role"
+                class="w-full md:w-56 mt-2" />
+            
+        </p-floatlabel>
+        <ng-container *ngIf="role?.invalid && role?.touched">
+            <small class="p-error" *ngIf="role?.hasError('required')">Role is required.</small>
+        </ng-container>
+
+        <!-- Submit Button -->
+        <p-button type="submit" class="p-button p-component mt-3" [disabled]="userForm.invalid">Submit</p-button>
+    </form>
+</div>

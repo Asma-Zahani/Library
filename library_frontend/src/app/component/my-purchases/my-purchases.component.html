@@ -1,0 +1,50 @@
+<div class="card surface-card shadow-2 p-4">
+    <h2 class="text-center mb-5 font-bold text-primary">My Purchases</h2>
+
+    
+    <!-- Check if borrows array is empty -->
+    <div *ngIf="purchases.length === 0" class="text-center mt-5">
+        <p class="text-secondary text-lg">No purchases yet.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 justify-content-center items-center">
+        <p-card *ngFor="let purchase of purchases" class="surface-card p-3 shadow-2">
+            <div class="flex justify-content-between align-items-center p-3 rounded-lg">
+                <div class="border-1 border-primary rounded-xl p-3 flex flex-column border-round-xl">
+                    <!-- Book Title -->
+                    <span class="text-xl font-semibold text-primary" style="font-size: 1.2rem;">
+                        {{ purchase.book.title }}
+                    </span>
+                    <!-- Book Description -->
+                <p class="text-sm text-secondary" style="font-size: 1rem;">
+                    <span *ngFor="let category of purchase.book.categories; let isLast = last">
+                        {{ category.name }}<span *ngIf="!isLast">, </span>
+                    </span>
+                </p>
+                </div>
+
+                <!-- Price Badge -->
+                <span class="badge p-2 border-1 border-primary rounded-full border-round-xl text-primary ml-2">
+                    {{ purchase.price | currency }}
+                </span>
+            </div>
+
+            <div class="mt-2">
+                <!-- Purchase Date -->
+                <p class="text-sm text-secondary">
+                    <i class="pi pi-calendar mr-2 text-primary"></i>
+                    Purchase Date: {{ purchase.transactionDate | date:'mediumDate' }}
+                </p>
+            </div>
+
+            <div class="p-card-footer flex justify-content-between mt-3">
+                <p-button icon="pi pi-eye" label="View Book Details" severity="secondary" class="mr-3" (click)="viewBookDetails(purchase.book.archiveId,purchase.book.id)"></p-button>
+               
+            </div>
+        </p-card>
+    </div>
+
+    <div class="flex justify-content-end mt-5">
+        <p-button icon="pi pi-download" label="Download All Receipts"
+            class="p-button-outlined p-button-rounded p-button-primary" (click)="downloadReceipts()"></p-button>
+    </div>
+</div>

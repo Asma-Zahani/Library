@@ -1,0 +1,68 @@
+<div class="grid justify-content-center align-items-start m-3">
+    <!-- Book Cover -->
+    <div class="col-12 md:col-4 text-center">
+        <img [src]="getBookCoverImage(book)" alt="{{ book?.title }}" class="w-full border-round shadow-2" />
+    </div>
+
+    <!-- Book Details -->
+    <div class="col-12 md:col-8">
+        <h1 class="text-2xl font-bold mb-3">{{ book?.title || 'Untitled' }}</h1>
+        <p class="text-lg mb-2">
+            <ng-container *ngIf="book?.authors?.length; else noAuthors">
+                <strong>Author(s):</strong> {{ authorNames }}
+            </ng-container>
+            <ng-template #noAuthors>Unknown</ng-template>
+        </p>
+        <p class="text-lg mb-2"><strong>Year:</strong> {{ book?.firstPublishYear || 'N/A' }}</p>
+        <p class="text-lg mb-2"><strong>Status:</strong> {{ book?.availabilityStatus || 'Unknown' }}</p>
+        <p class="text-lg mb-2" *ngIf="book?.price and book.availabilityStatus !== 'borrow_available'">
+            <strong>Price:</strong> ${{ book?.price }}
+        </p>
+        <p class="text-lg mb-2"><strong>Available Quantity:</strong> {{ book?.availableQuantity || 'N/A' }}</p>
+        <p class="text-lg mb-3"><strong>Categories:</strong>
+            <ng-container *ngIf="book?.categories?.length; else noCategories">
+                {{ categories }}
+            </ng-container>
+            <ng-template #noCategories>None</ng-template>
+        </p>
+        <p class="text-lg mb-3"><strong>Description:</strong></p>
+        <p class="text-md mb-4">{{ book?.description || 'No description available.' }}</p>
+
+        <!-- Actions -->
+        <div class="flex flex-column gap-3">
+            <!-- Purchase -->
+<div *ngIf="book?.availabilityStatus === 'open' || book?.availabilityStatus === 'private'" class="flex gap-2 align-items-center">
+                <p-button  label="Buy Now" icon="pi pi-shopping-cart"
+                    (click)="confirmBuy()" severity="help">
+                </p-button>
+                <p-inputnumber [(ngModel)]="purchaseQuantity" inputId="minmax" mode="decimal" [min]="1"
+                    [max]="book?.availableQuantity ?? null" placeholder="Qty" />
+            </div>
+
+        <!-- Borrow or Return Button -->
+        <div *ngIf="book?.availabilityStatus == 'borrow_available'">
+            <ng-container *ngIf="isBorrowed; else borrowTemplate">
+                <!-- Return Button (if the book is already borrowed) -->
+                <p-button label="Return" icon="pi pi-refresh" class="flex gap-2 align-items-center" (click)="onReturn()"
+                    severity="warn">
+                </p-button>
+            </ng-container>
+            <ng-template #borrowTemplate>
+                <!-- Borrow Button (if the book is not borrowed) -->
+                <div class="flex gap-3 align-items-center">
+
+                <p-button label="Borrow" icon="pi pi-book" (click)="onBorrow()"
+                    severity="info"></p-button>
+                <p-datepicker [(ngModel)]="date"></p-datepicker>
+                <!-- Validation Message -->
+                <div *ngIf="date === undefined" class="error">
+                    Due date is required.
+                </div>  
+                </div>
+                
+            </ng-template>
+        </div>
+    <p-confirmDialog></p-confirmDialog>
+        </div>
+    </div>
+</div>

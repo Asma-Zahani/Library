@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+:root {
+  /* Lighter Purple Color Palette */
+  --primary-color: #9c79d6;           /* Main lighter purple color */
+  --primary-color-hover: #8a67c3;    /* Hover state */
+  --primary-color-active: #7a55b0;   /* Active state */
+  --primary-light: #e3d8f7;           /* Light variant */
+  --primary-dark: #5e3fa4;            /* Darker variant */
+  --primary-color-text: #9c79d6;      /* Lighter primary color for text */
+  --secondary-color: #e1b7f1;         /* Light lavender secondary color */
+  --highlight-color: #7a55b0;         /* Highlight color for borders or accents */
+  --background-color: #f6f3ff;       /* Light background for contrast */
+  
+  /* Text Color Palette */
+  --text-primary: #5a2a8f;            /* Darker purple for main text */
+  --text-secondary: #8e6fbb;          /* Light purple for secondary text */
+  --text-muted: #9e9e9e;              /* Muted text for less emphasis */
+  --text-inverse: #ffffff;            /* White text for dark backgrounds */
+  --text-link: #7b61d2;               /* Link text color, matching primary color */
+}
+
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background-color: purple !important; /* Changer l'arrière-plan en violet */
+  color: white !important; /* Changer la couleur du texte en blanc */
+  border-color: purple !important; /* Facultatif : Changer la bordure du numéro de page sélectionné */
+}

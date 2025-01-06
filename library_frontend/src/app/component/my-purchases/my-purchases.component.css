@@ -1,0 +1,46 @@
+.my-purchases {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.my-purchases h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.no-purchases {
+  font-size: 1.2rem;
+  color: var(--text-secondary-color); /* Dynamic color based on theme */
+  margin-top: 50px;
+}
+
+.no-purchases i {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  display: block;
+  color: var(--text-secondary-color);
+}
+
+.purchase-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.purchase-item p-card {
+  box-shadow: var(--box-shadow);
+  background-color: var(--surface-card);
+}
+
+.card-body {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color); /* Dynamic text color */
+}
+
+p-card h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-color);
+}

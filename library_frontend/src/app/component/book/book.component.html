@@ -1,0 +1,42 @@
+<!-- Filter Section -->
+<div class="filters-container flex gap-4 justify-content-center mb-4 flex-wrap mt-3">
+    <input type="text" pInputText [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()"
+        placeholder="Search by title or author" class="filter-input w-full sm:w-20rem" />
+
+    <p-dropdown [(ngModel)]="selectedCategory" (ngModelChange)="applyFilters()" [options]="categories"
+        placeholder="Select Category" class="filter-dropdown w-full sm:w-12rem" [showClear]="true"></p-dropdown>
+
+    <input type="number" pInputText [(ngModel)]="minPrice" (ngModelChange)="applyFilters()" placeholder="Min Price"
+        class="filter-input w-full sm:w-8rem" />
+
+    <input type="number" pInputText [(ngModel)]="maxPrice" (ngModelChange)="applyFilters()" placeholder="Max Price"
+        class="filter-input w-full sm:w-8rem" />
+</div>
+
+
+<!-- Display Books -->
+<div class="flex flex-wrap gap-4 justify-content-center mt-5">
+    <p-card *ngFor="let book of filteredBooks" [header]="book.title" class="md:w-15rem">
+        <ng-template pTemplate="header">
+            <!-- Use a container for tag and image, tag will be placed above the image -->
+            <div class="relative">
+                <!-- Tag positioned above the image -->
+                <p-tag [severity]="getStatusSeverity(book.availabilityStatus)" [value]="book.availabilityStatus"
+                    [rounded]="true" class="absolute top-0 left-0 z-1 "></p-tag>
+                <!-- Image with fallback logic -->
+                <img [src]="getBookCoverImage(book)" alt="Book cover" class="z-0 w-15rem h-20rem" />
+            </div>
+        </ng-template>
+
+        <p class="book-title">
+            <span *ngIf="book.availabilityStatus !== 'borrow_available'">Price: ${{ book.price }}</span> <br />
+        </p>
+
+        <ng-template pTemplate="footer">
+            <div class="flex gap-2 justify-content-center">
+                <p-button label="View Details" severity="help"
+                    (onClick)="navigateToBook(book.archiveId, book.id)"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>

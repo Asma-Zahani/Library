@@ -1,0 +1,122 @@
+<div class="ml-5">
+
+
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+        <!-- ArchiveId -->
+        <p-floatlabel variant="on">
+            <input pInputText id="ArchiveId" formControlName="archiveId" autocomplete="off" class="w-full mb-2 " />
+            <label for="archiveId">ArchiveId</label>
+
+        </p-floatlabel>
+        <div *ngIf="bookForm.get('archiveId')?.invalid && bookForm.get('archiveId')?.touched">
+            <small class="error mb-3">Archive ID is required.</small>
+        </div>
+        <!-- Title -->
+        <p-floatlabel variant="on">
+            <input pInputText id="title" formControlName="title" autocomplete="off" class="w-full mb-2" />
+            <label for="title">Title</label>
+        </p-floatlabel>
+        <div *ngIf="bookForm.get('title')?.invalid && bookForm.get('title')?.touched">
+            <small class="error mb-3">Title is required.</small>
+        </div>
+        <!-- Authors Section -->
+        <div>
+            <h3>Add Authors</h3>
+            <div class="flex flex-wrap gap-3">
+                <p-floatlabel variant="on" class="w-full sm:w-1/2">
+                    <label for="authorName">Author Name:</label>
+                    <input pInputText id="authorName" [(ngModel)]="newAuthor.name"
+                        [ngModelOptions]="{ standalone: true }" class="w-full" />
+                </p-floatlabel>
+                <p-floatlabel variant="on" class="w-full sm:w-1/2">
+                    <label for="authorKey">Author Key:</label>
+                    <input pInputText class="w-full" id="authorKey" [(ngModel)]="newAuthor.key"
+                        [ngModelOptions]="{ standalone: true }" />
+                </p-floatlabel>
+                <p-button (click)="addAuthor()" severity="help" class="ml-3">Add Author</p-button>
+            </div>
+
+            <h4>Added Authors</h4>
+            <ul>
+                <li *ngFor="let author of authors; let i = index">
+                    {{ author.name }} ({{ author.key }})
+                    <p-button icon="pi pi-trash" (click)="removeAuthor(i)"></p-button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Categories Section -->
+        <div>
+            <h3>Add Categories</h3>
+            <div class="flex flex-wrap gap-3">
+                <p-floatlabel variant="on" class="w-full sm:w-1/2">
+                    <label for="categoryName">Category Name:</label>
+                    <input pInputText id="categoryName" [(ngModel)]="newCategory.name"
+                        [ngModelOptions]="{ standalone: true }" class="w-full" />
+                </p-floatlabel>
+                <p-button (click)="addCategory()" severity="help" class="ml-3">Add Category</p-button>
+            </div>
+
+            <h4>Added Categories</h4>
+            <ul>
+                <li *ngFor="let category of categories; let i = index">
+                    {{ category.name }}
+                    <p-button icon="pi pi-trash" (click)="removeCategory(i)"></p-button>
+                </li>
+            </ul>
+        </div>
+
+
+        <!-- First Publish Year -->
+        <p-floatlabel variant="on">
+            <input pInputText id="firstPublishYear" formControlName="firstPublishYear" type="number" autocomplete="off"
+                class="w-full mb-2" />
+            <label for="firstPublishYear">First Publish Year</label>
+        </p-floatlabel>
+        <div *ngIf="bookForm.get('firstPublishYear')?.invalid && bookForm.get('firstPublishYear')?.touched">
+            <small class="error mb-3">FirstPublishYear is required.</small>
+        </div>
+        <!-- Status Dropdown -->
+        <p-floatlabel variant="on">
+            <p-select [options]="status" formControlName="availabilityStatus" optionLabel="name"
+                class="w-full md:w-56 mb-2" />
+        </p-floatlabel>
+        <div *ngIf="bookForm.get('availabilityStatus')?.invalid && bookForm.get('availabilityStatus')?.touched">
+            <small class="error mb-3">AvailabilityStatus is required.</small>
+        </div>
+        <!-- Price -->
+        <p-floatlabel variant="on">
+            <input pInputText id="price" formControlName="price" type="number" autocomplete="off" class="w-full mb-2" />
+            <label for="price">Price</label>
+        </p-floatlabel>
+        <div *ngIf="bookForm.get('price')?.invalid && bookForm.get('price')?.touched">
+            <small class="error mb-3">Price is required.</small>
+        </div>
+        <!-- Description -->
+        <p-floatlabel variant="on">
+            <textarea pTextarea id="description" formControlName="description" rows="5" cols="30" style="resize: none"
+                class="w-full mb-2"></textarea>
+            <label for="description">Description</label>
+        </p-floatlabel>
+
+        <!-- Available quantity -->
+        <p-floatlabel variant="on">
+            <input pInputText id="availableQuantity" formControlName="availableQuantity" type="number"
+                autocomplete="off" class="w-full mb-2" />
+            <label for="availableQuantity">AvailableQuantity</label>
+        </p-floatlabel>
+        <div *ngIf="bookForm.get('availableQuantity')?.invalid && bookForm.get('availableQuantity')?.touched">
+            <small class="error mb-3">AvailableQuantity is required.</small>
+        </div>
+        <!-- Image URL -->
+        <p-floatlabel variant="on">
+            <input pInputText id="imageUrl" formControlName="imageUrl" autocomplete="off" class="w-full mb-2" />
+            <label for="imageUrl">Image URL</label>
+        </p-floatlabel>
+        <div *ngIf="bookForm.get('imageUrl')?.invalid && bookForm.get('imageUrl')?.touched">
+            <small class="error mb-3">ImageUrl is required.</small>
+        </div>
+        <!-- Submit Button -->
+        <button type="submit" class="p-button p-component mt-3">Submit</button>
+    </form>
+</div>

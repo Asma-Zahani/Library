@@ -1,0 +1,16 @@
+<div class="ml-5">
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+        <!-- name -->
+        <p-floatlabel variant="on">
+            <input pInputText id="name" formControlName="name" autocomplete="off" class="w-full mb-2" />
+            <label for="name">Name</label>
+            <ng-container *ngIf="name?.invalid && name?.touched">
+                <small class="p-error" *ngIf="name?.hasError('required')">Name is required.</small>
+            </ng-container>
+        </p-floatlabel>
+        <p-button *ngIf="isEditMode" label="Fetch data from api" (click)="fetchDataFromApi()" class="mr-3"></p-button>
+
+        <!-- Submit Button -->
+        <button type="submit" class="p-button p-component mt-3" [disabled]="categoryForm.invalid">Submit</button>
+    </form>
+</div>

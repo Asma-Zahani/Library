@@ -1,0 +1,40 @@
+
+
+<div class="flex align-items-center justify-content-center h-screen bg-gray-100">
+    <div class="card shadow-lg rounded-lg p-4 w-full md:w-6 lg:w-4">
+        <h2 class="text-center mb-4 font-bold text-xl">Login</h2>
+<p-toast></p-toast>
+        <form (ngSubmit)="login()" #loginForm="ngForm">
+            <!-- Username Input with p-floatlabel -->
+            <p-floatlabel class="w-full mb-4">
+                <input type="text" pInputText [(ngModel)]="credentials.username" name="username" id="username"
+                    class="w-full" placeholder="Username" required />
+                <label for="username">Username</label>
+            </p-floatlabel>
+
+            <!-- Password Input with p-password -->
+            <p-floatlabel class="w-full mb-4">
+                <p-password [(ngModel)]="credentials.password" name="password" id="password" [toggleMask]="true"
+                    [feedback]="false" placeholder="Password" fluid="true" class="w-full border-gray-300 rounded-md ng-invalid ng-dirty">
+                </p-password>
+                <label for="password">Password</label>
+
+            </p-floatlabel>
+            <div class="flex align-items-center justify-content-between mb-4">
+                <span>Don't have an account? <a [routerLink]="'/register'" class="text-sm text-blue-500 hover:underline">Register</a></span>
+            </div>
+<div class="flex align-items-center justify-content-center"> 
+    <p-button label="Login" type="submit"
+        [disabled]="!loginForm.valid || isLoading">
+        <ng-template pTemplate="icon">
+            <i *ngIf="isLoading" class="pi pi-spin pi-spinner"></i>
+        </ng-template>
+    </p-button>
+</div>
+            
+
+<p-toast></p-toast>
+
+        </form>
+    </div>
+</div>

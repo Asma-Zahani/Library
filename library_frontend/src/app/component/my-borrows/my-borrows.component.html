@@ -1,0 +1,55 @@
+<div class="card surface-card shadow-2 p-4">
+    <h2 class="text-center mb-5 font-bold text-primary">My borrows</h2>
+
+
+    <!-- Check if borrows array is empty -->
+    <div *ngIf="borrows.length === 0" class="text-center mt-5">
+        <p class="text-secondary text-lg">No borrows yet.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 justify-content-center items-center">
+        <p-card *ngFor="let borrow of borrows" class="surface-card p-3 shadow-2">
+            <div class="flex justify-content-between align-items-center p-3 rounded-lg">
+                <div class="border-1 border-primary rounded-xl p-3 flex flex-column border-round-xl">
+                    <!-- Book Title -->
+                    <span class="text-xl font-semibold text-primary" style="font-size: 1.2rem;">
+                        {{ borrow.book.title }}
+                    </span>
+                    <!-- Book Description -->
+                    <p class="text-sm text-secondary" style="font-size: 1rem;">
+                        <span *ngFor="let category of borrow.book.categories; let isLast = last">
+                            {{ category.name }}<span *ngIf="!isLast">, </span>
+                        </span>
+                    </p>
+                </div>
+
+        
+            </div>
+
+            <div class="mt-2">
+                <!-- borrow Date -->
+                <p class="text-sm text-secondary">
+                    <i class="pi pi-calendar mr-2 text-primary"></i>
+                    borrow Date: {{ borrow.transactionDate | date:'mediumDate' }}
+                    <!-- Due Date -->
+                        <i class="pi pi-calendar ml-5 mr-2 text-primary"></i>
+                        Due Date:
+                        {{ borrow.dueDate | date:'mediumDate' }}
+                </p>
+                <!-- Status -->
+                <p class="text-sm text-secondary">
+                    <i class="pi pi-info-circle mr-2" [ngClass]="borrow.actualReturnDate ? 'text-success' : 'text-warning'"></i>
+                    Status: {{ borrow.actualReturnDate ? 'Returned' : 'Not Returned Yet' }}
+                </p>
+                
+            </div>
+
+            <div class="p-card-footer flex justify-content-between mt-3">
+                <p-button icon="pi pi-eye" label="View Book Details" severity="secondary" class="mr-3"
+                    (click)="viewBookDetails(borrow.book.archiveId,borrow.book.id)"></p-button>
+
+            </div>
+        </p-card>
+    </div>
+
+  
+</div>
